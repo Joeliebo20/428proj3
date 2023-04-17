@@ -35,6 +35,7 @@ while time.time() - start < 180:
 
     try:
         server_info = (host, port)
+        sent = time.time()
         msg = f'ping, {sequence_number}, {time.time()}'
         client.sendto(msg, server_info)
         print(msg)
@@ -42,11 +43,14 @@ while time.time() - start < 180:
         sequence_number += 1
 
         resp, addr = client.recvfrom(1024)
-        print(f'server response: {resp}')
+        received = time.time()
+        print(f'response: {resp}')
         packets_received += 1
+        rtt = received - sent
+        print(f'Round Trip Time (RTT): {rtt}')
     except:
         print("Client ping timed out")
-        
+
     time.sleep(3) # wait 3 seconds until next send
 
 while True:
@@ -61,7 +65,9 @@ while True:
         continue
 
     # Otherwise, prepare the server response
-    print(message)
+    start_time = time.time()
+    while time.time() - start_time < 1:
+        response = f'echo, {sequence_number}, {time.time()}'
+        serverSocket.sendto(response, address)
+    else:
 
-    # The server responds
-    serverSocket.sendto(message, address)
