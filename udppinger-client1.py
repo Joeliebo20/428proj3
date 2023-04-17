@@ -69,5 +69,3 @@ while True:
     while time.time() - start_time < 1:
         response = f'echo, {sequence_number}, {time.time()}'
         serverSocket.sendto(response, address)
-    else:
-
