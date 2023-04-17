@@ -19,7 +19,7 @@ For Part 3, ...
 
 ### INSTRUCTIONS
 
-to run PART 1: $ python3 udppinger-client1.py/n
+to run PART 1: $ python3 udppinger-client1.py
 to run PART 2: $ python3 udppinger-client2.py
 
 ### SUBMISSION
