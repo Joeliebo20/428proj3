@@ -1,5 +1,6 @@
 # We will need the following module to generate randomized lost packets
 import random
+import time
 
 # Import socket module
 from socket import *
@@ -10,7 +11,15 @@ from socket import *
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 
 # Assign IP address and port number to socket
-serverSocket.bind(('', 12000))
+port = 8000
+host = gethostbyname(gethostname())
+print(f'host: {host}')
+serverSocket.bind((host, port))
+
+
+client = socket(AF_INET, SOCK_DGRAM)
+start = time.time()
+
 
 while True:
     # Generate random number in the range of 0 to 10
@@ -24,6 +33,7 @@ while True:
         continue
 
     # Otherwise, prepare the server response
+    print(message)
 
     # The server responds
     serverSocket.sendto(message, address)
