@@ -20,7 +20,9 @@ For Part 3, ...
 ### INSTRUCTIONS
 
 to run PART 1: $ python3 udppinger-client1.py <br />
-to run PART 2: $ python3 udppinger-client2.py
+to run PART 2: $ python3 udppinger-client2.py <br />
+to run PART 3: $ python3 webserver3.py <br />
+               $ python3 proxyserver3.py <br />
 
 ### SUBMISSION
 
@@ -28,7 +30,7 @@ I have done this assignment completely on my own. I have not copied it, nor have
 
 By signing my name below and submitting the project, I confirm the above statement is true and that I have followed the course guidelines and policies.
 
-Submission date: 
+Submission date: Thursday April 27th 2023 (*change if submitted before*)
 
 Team member 1 name: Katie Welcher
 
