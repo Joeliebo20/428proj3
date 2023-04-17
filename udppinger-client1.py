@@ -32,19 +32,22 @@ total_time = 180 # 3 minutes in seconds
 start = time.time()
 
 while time.time() - start < 180:
-    msg = f'ping {sequence_number} sent successfully at {time.time()}'
 
     try:
         server_info = (host, port)
+        msg = f'ping, {sequence_number}, {time.time()}'
         client.sendto(msg, server_info)
+        print(msg)
         packets_sent += 1
         sequence_number += 1
 
         resp, addr = client.recvfrom(1024)
+        print(f'server response: {resp}')
         packets_received += 1
     except:
+        print("Client ping timed out")
         
-
+    time.sleep(3) # wait 3 seconds until next send
 
 while True:
     # Generate random number in the range of 0 to 10
