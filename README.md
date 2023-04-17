@@ -19,7 +19,7 @@ For Part 2, our program handles the same task as Part 1, but is capable of servi
 
 ### INSTRUCTIONS
 
-to run PART 1: $ python3 webserver1
+to run PART 1: $ python3 webserver1/n
 to run PART 2: $ python3 webserver2
 
 ### SUBMISSION
