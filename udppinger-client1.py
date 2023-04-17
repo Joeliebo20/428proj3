@@ -36,13 +36,13 @@ while time.time() - start < 180:
     try:
         server_info = (host, port)
         sent = time.time()
-        msg = f'ping, {sequence_number}, {time.time()}'
+        msg = f'ping, {sequence_number}, {time.time()}'.encode()
         client.sendto(msg, server_info)
         print(msg)
         packets_sent += 1
         sequence_number += 1
 
-        resp, addr = client.recvfrom(1024)
+        resp, addr = serverSocket.recvfrom(1024)
         received = time.time()
         print(f'response: {resp}')
         packets_received += 1
