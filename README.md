@@ -4,9 +4,11 @@
 
 ### SUMMARY
 
-For Part 1, our program creates a server socket, which allows connection to a single client and handles the HTTP request. The server then sends a message to the client depending on whether or not the requested file is present.
+For Part 1, our program creates a server socket, which receives client packets via UDP. Our program runs for 3 minutes, and every 3 seconds, the client sends a ping to the server with its sequence number and the timestamp at which it is sent. If the server sucessfully receives the ping, it sends a response/echo message back to the client within 1 second. Otherwise, the client ping times out. Our program also prints out the RTT on the client side, providing the time it takes for the client to send the ping and receive an echo. However, because UDP is unreliable, even if all the above is successful, if a random integer is less than 4, the packet is considered lost.
 
-For Part 2, our program handles the same task as Part 1, but is capable of serving multiple request simultanesously across multiple browsers.
+For Part 2, our program also prints the minimum RTT< maximum RTT, total number of RTTs (number of successful ping-echo pairs), the packet loss rate (as a percentage), and the average RTTs.
+
+For Part 3, ...
 
 ### NOTES, KNOWN BUGS, AND/OR INCOMPLETE PARTS
 
@@ -14,13 +16,11 @@ For Part 2, our program handles the same task as Part 1, but is capable of servi
 
 ### REFERENCES
 
-* https://docs.python.org/3/library/threading.html#module-threading
-* https://realpython.com/python-sockets/
 
 ### INSTRUCTIONS
 
-to run PART 1: $ python3 webserver1/n
-to run PART 2: $ python3 webserver2
+to run PART 1: $ python3 udppinger-client1.py/n
+to run PART 2: $ python3 udppinger-client2.py
 
 ### SUBMISSION
 
@@ -28,7 +28,7 @@ I have done this assignment completely on my own. I have not copied it, nor have
 
 By signing my name below and submitting the project, I confirm the above statement is true and that I have followed the course guidelines and policies.
 
-Submission date: Thursday, April 27th, 2023
+Submission date: 
 
 Team member 1 name: Katie Welcher
 
