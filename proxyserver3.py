@@ -8,64 +8,62 @@ import sys
 
 proxySocket = socket(AF_INET, SOCK_STREAM)
 host = '149.125.28.177'
+print(host)
 # local host = 127.0.0.1, eduroam IP = 149.125.90.115
-port = 8080
+port = 8070
 proxySocket.bind((host, port))
-proxySocket.listen(10)
+proxySocket.listen(5)
 
-def parse_port(msg):
-    start_index = msg.find("/") + 1
-    end_index = msg.find("/", start_index)
-    port = msg[start_index:end_index]
-    return port
+cache = {}
 
-def parse_host(msg):
-    host_start = msg.find('Host: ') + len('Host: ')
-    host_end = msg.find('\r\n', host_start)
-    host = msg[host_start:host_end]
-    if ':' in host:
-        host, port = host.split(':')
-    print('host: ', host)
-    return host
-
-def server(connectionSocket, addr):
-
-    msg = connectionSocket.recv(4096)
-    print(msg)
-    filename = msg.decode().split()[1]
+def send_messages(filename, thread_id, connectionSocket, msg):
     serverSocket = socket(AF_INET, SOCK_STREAM)
     server_port = 8000
     server_host = '149.125.171.215'
     print(server_host)
-    thread_id = threading.get_ident()
-    
     serverSocket.connect((server_host, server_port))
     time = dt.datetime.now()
     print(f'proxy-forward, server, {thread_id}, {time}')
-    serverSocket.sendall(msg)
+    serverSocket.sendall(msg.encode())
 
-    res = serverSocket.recv(4096)
-    
-    if '.pdf' in filename:
-        f = open(filename[1:], 'rb')
-        data = f.read()
-        msg = f'HTTP/1.1 200 OK\r\nContent-Type: application/pdf\r\nContent-Length: {len(data)}\r\n\r\n'
-        if msg.encode() is res:
-            connectionSocket.send(f'HTTP/1.1 200 OK\r\nContent-Type: application/pdf\r\nContent-Length: {len(data)}\r\n\r\n')
+    resp = serverSocket.recv(4096)
+    try:
+        cache[filename] = (resp, dt.datetime.now())
+        time = dt.datetime.now()
+        print(f'proxy-cache, client, {thread_id}, {time}')
+        connectionSocket.send(b'HTTP/1.1 200 OK\r\n')
+        connectionSocket.send(resp)
+        connectionSocket.send('\r\n'.encode())
+    except:
+        time = dt.datetime.now()
+        print(f'proxy-cache, client, {thread_id}, {time}')
+        connectionSocket.send(b'HTTP/1.1 404 NOT FOUND\r\n')
+    return serverSocket
+
+def server(connectionSocket, addr):
+
+    msg = connectionSocket.recv(4096).decode()
+    thread_id = threading.get_ident()
+    time =  dt.datetime.now()
+    filename = msg.split()[1]
+
+    if filename in cache:
+        if time.second - cache[filename][1].second < 5:
+            time = dt.datetime.now()
+            print(f'proxy-cache, client, {thread_id}, {time}')
+            resp = b'HTTP/1.1 200 OK\r\n'
+            connectionSocket.send(resp)
+            connectionSocket.send(cache[filename][0])
+            connectionSocket.send('\r\n'.encode())
+            connectionSocket.close()
+        else:
+            del cache[filename]
+            serverSocket = send_messages(filename, thread_id, connectionSocket, msg)
+            res = serverSocket.recv(4096)
+            connectionSocket.send(res)
+            serverSocket.close()
     else:
+        serverSocket = send_messages(filename, thread_id, connectionSocket, msg)
+        res = serverSocket.recv(4096)
         connectionSocket.send(res)
-
-    serverSocket.close()
-    connectionSocket.close()
-
-def main():
-    while True:
-        # Establish the connection
-        print('Ready to serve...')
-
-        connectionSocket, addr = proxySocket.accept() 
-
-        thr = threading.Thread(target=server, args=(connectionSocket, addr))
-        thr.start()
-
-main()
+        serverSocket.close()
