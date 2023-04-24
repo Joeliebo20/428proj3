@@ -86,8 +86,10 @@ def main():
             sequence_number += 1
             success += 1
             serverSocket.sendto(response.encode(), address)
+    print(f'minimum RTT: {min(rtts)}')
+    print(f'maximum RTT:' {max(rtts)})
     print(f'successful RTTs: {success}')
-    print(f'packet loss rate: {(packets_lost / total_packets) * 100}')
+    print(f'packet loss rate: {(packets_lost / total_packets) * 100}%')
     sum = 0 
     for rtt in rtts:
         sum += rtt
