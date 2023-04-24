@@ -87,7 +87,7 @@ def main():
             success += 1
             serverSocket.sendto(response.encode(), address)
     print(f'minimum RTT: {min(rtts)}')
-    print(f'maximum RTT:' {max(rtts)})
+    print(f'maximum RTT: {max(rtts)}')
     print(f'successful RTTs: {success}')
     print(f'packet loss rate: {(packets_lost / total_packets) * 100}%')
     sum = 0 
