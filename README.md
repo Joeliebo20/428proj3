@@ -8,7 +8,7 @@ For Part 1, our program creates a server socket, which receives client packets v
 
 For Part 2, our program also prints the minimum RTT< maximum RTT, total number of RTTs (number of successful ping-echo pairs), the packet loss rate (as a percentage), and the average RTTs.
 
-For Part 3, 
+For Part 3, our program uses the proxyserver file from Project 2 to implement a proxy server with the UDP pinger. The proxy server is a middle man between the client's ping and the server's response message. The client ping code and the server echo code run on their own seperate threads. The program runs similarly as Part 1 and Part 2, except the server code terminates if it doesn't receive a ping from the client for 30 seconds.
 
 ### NOTES, KNOWN BUGS, AND/OR INCOMPLETE PARTS
 
@@ -32,7 +32,7 @@ I have done this assignment completely on my own. I have not copied it, nor have
 
 By signing my name below and submitting the project, I confirm the above statement is true and that I have followed the course guidelines and policies.
 
-Submission date: Thursday April 27th 2023 (*change if submitted before*)
+Submission date: Thursday April 27th 2023
 
 Team member 1 name: Katie Welcher
 
