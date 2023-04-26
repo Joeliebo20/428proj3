@@ -8,7 +8,7 @@ For Part 1, our program creates a server socket, which receives client packets v
 
 For Part 2, our program also prints the minimum RTT< maximum RTT, total number of RTTs (number of successful ping-echo pairs), the packet loss rate (as a percentage), and the average RTTs.
 
-For Part 3, ...
+For Part 3, 
 
 ### NOTES, KNOWN BUGS, AND/OR INCOMPLETE PARTS
 
@@ -24,8 +24,7 @@ to run PART 1: $ python3 udppinger-client1.py server.py <br />
 to run PART 2: $ python3 udppinger-client2.py <br />
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $python3 server.py <br />
 to run PART 3: $ python3 webserver3.py <br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $python3 server.py <br />
-
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $python3 proxyserver3.py <br />
 
 ### SUBMISSION
 
