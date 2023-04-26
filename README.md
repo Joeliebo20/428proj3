@@ -19,10 +19,13 @@ For Part 3, ...
 
 ### INSTRUCTIONS
 
-to run PART 1: $ python3 udppinger-client1.py <br />
+to run PART 1: $ python3 udppinger-client1.py server.py <br />
+&nbsp; &nbsp; $python3 server.py <br />
 to run PART 2: $ python3 udppinger-client2.py <br />
+&nbsp; &nbsp; $python3 server.py <br />
 to run PART 3: $ python3 webserver3.py <br />
-&nbsp &nbsp &nbsp $ python3 proxyserver3.py <br />
+&nbsp; &nbsp; $python3 server.py <br />
+
 
 ### SUBMISSION
 
