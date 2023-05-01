@@ -14,7 +14,7 @@ def UDP_server():
     serverSocket.settimeout(30)
 
     # Assign IP address and port number to socket
-    serverSocket.bind(('149.125.114.135', 8000))
+    serverSocket.bind(('149.125.168.212', 8000))
 
 
     sequence_number = 0
@@ -91,7 +91,7 @@ def server(connectionSocket):
         # create out own sequence with format of http response msg
 def main():
     serverSocket = socket(AF_INET, SOCK_STREAM) # local host = 127.0.0.1, eduroam IP = 149.125.90.115
-    host = '149.125.114.135'
+    host = '149.125.168.212'
     print(host) # local host = 127.0.0.1, eduroam IP = 149.125.90.115
     port = 8000
     serverSocket.bind((host, port))
@@ -99,7 +99,6 @@ def main():
 
     UDP_thread = threading.Thread(target=UDP_server)
     UDP_thread.start()
-    UDP_thread.join()
 
     while True:
         print("Ready to serve...")
