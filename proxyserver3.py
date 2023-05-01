@@ -8,9 +8,8 @@ import time
 import sys
 
 proxySocket = socket(AF_INET, SOCK_STREAM)
-host = '149.125.114.135'
+host = '149.125.168.212'
 print(host)
-# local host = 127.0.0.1, eduroam IP = 149.125.90.115
 port = 8080
 proxySocket.bind((host, port))
 proxySocket.listen(10)
@@ -20,7 +19,7 @@ cache = {}
 def send_messages(filename, thread_id, connectionSocket, msg):
     serverSocket = socket(AF_INET, SOCK_STREAM)
     server_port = 8000
-    server_host = host
+    server_host = '149.125.30.245'
     print(server_host)
     serverSocket.connect((server_host, server_port))
     time = dt.datetime.now()
@@ -72,7 +71,7 @@ def server(connectionSocket, addr):
 
 
 def ping():
-    server_info = ('149.125.114.135', 8000)
+    server_info = ('149.125.30.245', 8000)
 
     clientSocket = socket(AF_INET, SOCK_DGRAM)
     clientSocket.settimeout(1)
